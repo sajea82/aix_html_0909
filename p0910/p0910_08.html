@@ -68,8 +68,13 @@
         <textarea name="content" rows="20" cols="80"></textarea>
         <br>
         <input type="submit" value="전송">
-        <button type="button">전송</button>
-
+        <button type="button" onclick="checkBtn()">전송</button>
+        <script>
+            function checkBtn(){
+                alert("버튼클릭"); // 자바스크립트 정규화 체크
+                frm.submit();    // form폼 페이지 action을 구동
+            }
+        </script>
     </form>
 
 </body>
