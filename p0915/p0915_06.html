@@ -3,42 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
     <title>포레스트 리솜</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        *{margin:0; padding:0; box-sizing: border-box;
-        font-family: "Noto Sans KR", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-        }
-        a{color:inherit; text-decoration: none;}
-        ul,ol{list-style: none;}
-        header{width:100%; height:120px; border:1px solid #efefef;}
-        .top{width:1290px; height:120px;
-        margin:0 auto; display: flex;}
-        .logo{width:132px; height:120px;
-        background: url('images/img_logo_re_forest.png') no-repeat 0 47px;
-        }
-        .menu{width:1158px;height:120px;  }
-        .sub_menu{width:1158px; height:40px;  }
-        .sub_menu ul{display: flex; justify-content: flex-end;
-            position:relative; top:20px;
-        }
-        .sub_menu li{ border-right:1px solid #eee;
-            text-align: center; padding:0 20px;
-            font-size: 12px; color:#8a8d8f; font-weight:400;
-        }
-        #sub_menu_li{padding-right: 0;  border-right:0;  }
-        nav{width:1158px; height:80px;  }
-        nav ul{ display: flex; justify-content: flex-end; }
-        nav li{ padding:25px 0 26px 0; text-align: center; margin:0 40px;
-            font-size: 19px; color:#1d1d1d; font-weight:500;
-            }
-        nav li:hover{border-bottom:5px solid #718929; color:#718929;
-        font-weight: 700;
-        }
-        #nav_li{margin-right:0;}
+        
     </style>
 </head>
 <body>
@@ -71,8 +40,136 @@
         </header>
         <!-- 배너이미지 넣기 -->
         <div id="banner"></div>
+        <section>
+            <div class="nav_history">
+                <ul>
+                    <li>HOME</li>
+                    <li><i class="fa-solid fa-chevron-right"></i></li>
+                    <li>포레스트</li>
+                    <li><i class="fa-solid fa-chevron-right"></i></li>
+                    <li>뉴스</li>
+                </ul>
+            </div>
+            <div class="title">뉴스</div>
+            <div class="search">
+                <form name="searchFrm" action="#" method="get">
+                    <select name="gubun">
+                        <option value="제목">제목</option>
+                        <option value="내용">내용</option>
+                    </select>
+                    <input type="search" name="key" id="key">
+                    <button type="button">검색</button>
+                </form>
+            </div>
+            <div class="cont">
+                <table>
+                    <colgroup>
+                        <col width="10%">
+                        <col width="*">
+                        <col width="10%">
+                        <col width="15%">
+                        <col width="10%">
+                    </colgroup>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>리조트</th>
+                        <th>날짜</th>
+                        <th>조회수</th>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>조식 메뉴 개편 및 이용요금 변경 안내</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>유아용 웨건 '원더폴드(wonderfold)' 대여 서비스</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>[PB] 리솜 프리미엄 LA 갈비 세트 출시</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>[2025 사진공모전] 눈부시게 푸르른 날 수상작 발표</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>[포레스트]사우나 및 스파 전 시설 휴장 안내 (3.30 ~ 4.5)</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>[리솜리조트] CCM 인증 획득 안내</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>해브나인 스파 아쿠아슈즈 필수착용 안내 (25.11.01~)</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>제1회 호반 시그니처 메뉴 경진대회 개최</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>[2025 사진공모전] 눈부시게 푸르른 날</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>[PB] 어메니티(리프레젠트2) 리뉴얼 안내</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>익스프레스 체크아웃 서비스 오픈</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>안전한 먹거리 제공을 위해 한국식품안전관리인증원MOU체결</td>
+                        <td>포레스트</td>
+                        <td>2026-09-15</td>
+                        <td>100</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
 
     </div>
+    <div class="page"></div>
+    <footer>
+
+    </footer>
 
 </body>
 </html>
