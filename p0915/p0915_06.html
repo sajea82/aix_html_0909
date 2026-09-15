@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포레스트 리솜</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        *{margin:0; padding:0; box-sizing: border-box;
+        font-family: "Noto Sans KR", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        }
+        a{color:inherit; text-decoration: none;}
+        ul,ol{list-style: none;}
+        header{width:100%; height:120px; border:1px solid #efefef;}
+        .top{width:1290px; height:120px;
+        margin:0 auto; display: flex;}
+        .logo{width:132px; height:120px;
+        background: url('images/img_logo_re_forest.png') no-repeat 0 47px;
+        }
+        .menu{width:1158px;height:120px;  }
+        .sub_menu{width:1158px; height:40px;  }
+        .sub_menu ul{display: flex; justify-content: flex-end;
+            position:relative; top:20px;
+        }
+        .sub_menu li{ border-right:1px solid #eee;
+            text-align: center; padding:0 20px;
+            font-size: 12px; color:#8a8d8f; font-weight:400;
+        }
+        #sub_menu_li{padding-right: 0;  border-right:0;  }
+        nav{width:1158px; height:80px;  }
+        nav ul{ display: flex; justify-content: flex-end; }
+        nav li{ padding:25px 0 26px 0; text-align: center; margin:0 40px;
+            font-size: 19px; color:#1d1d1d; font-weight:500;
+            }
+        nav li:hover{border-bottom:5px solid #718929; color:#718929;
+        font-weight: 700;
+        }
+        #nav_li{margin-right:0;}
+    </style>
+</head>
+<body>
+    <div id="back">
+        <header>
+            <div class="top">
+                <a href="https://www.resom.co.kr/forest"><div class="logo"></div></a>
+                <div class="menu">
+                    <div class="sub_menu">
+                        <ul>
+                            <li>회원예약</li>
+                            <li>패키지 예약</li>
+                            <li>부대시설 예약</li>
+                            <li>회원가입</li>
+                            <li id="sub_menu_li">로그인</li>
+                        </ul>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li>포레스트</li>
+                            <li>스파</li>
+                            <li>객실</li>
+                            <li>특별한경험</li>
+                            <li>부대시설</li>
+                            <li id="nav_li">브랜드소개</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- 배너이미지 넣기 -->
+        <div id="banner"></div>
+
+    </div>
+
+</body>
+</html>
