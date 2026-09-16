@@ -1,0 +1,963 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>리조트 소식 - 게시글 상세</title>
+
+    <!-- Google Web Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+            color: #333;
+            background: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        textarea {
+            font-family: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            width: 100%;
+            height: 90px;
+            border-bottom: 1px solid #eee;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            color: #173f35;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            transition: color .2s;
+        }
+
+        .nav a:hover {
+            color: #779b80;
+        }
+
+        .header-util {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .sub-hero {
+            height: 300px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    rgba(30, 55, 45, .38),
+                    rgba(30, 55, 45, .38)
+                ),
+                url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1800&q=80")
+                center / cover no-repeat;
+
+            color: #fff;
+            text-align: center;
+        }
+
+        .sub-hero h1 {
+            font-size: 40px;
+            font-weight: 500;
+            letter-spacing: -2px;
+        }
+
+        .sub-hero p {
+            margin-top: 12px;
+            font-size: 15px;
+            opacity: .9;
+            letter-spacing: .5px;
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 30px 120px;
+        }
+
+        .page-title {
+            margin-bottom: 45px;
+            text-align: center;
+        }
+
+        .page-title h2 {
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: -1.5px;
+        }
+
+        .page-title p {
+            margin-top: 10px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* =========================
+           POST
+        ========================= */
+
+        .post {
+            border-top: 2px solid #222;
+        }
+
+        .post-header {
+            padding: 28px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .post-category {
+            display: inline-block;
+            color: #779b80;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .post-title {
+            font-size: 25px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            color: #222;
+        }
+
+        .post-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .post-content {
+            padding: 55px 20px 70px;
+            min-height: 350px;
+            line-height: 2;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .post-content img {
+            display: block;
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto 40px;
+        }
+
+        .post-content h3 {
+            margin: 35px 0 15px;
+            font-size: 20px;
+            color: #222;
+        }
+
+        /* =========================
+           ATTACHMENT
+        ========================= */
+
+        .attachment {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            background: #fafafa;
+            font-size: 14px;
+        }
+
+        .attachment strong {
+            display: inline-block;
+            width: 80px;
+            color: #555;
+        }
+
+        .attachment a {
+            color: #777;
+        }
+
+        .attachment a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           PREV / NEXT
+        ========================= */
+
+        .post-navigation {
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .post-navigation a {
+            display: flex;
+            padding: 18px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .post-navigation a:last-child {
+            border-bottom: 0;
+        }
+
+        .post-navigation span:first-child {
+            width: 90px;
+            color: #888;
+        }
+
+        .post-navigation span:last-child {
+            color: #333;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button-area {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn {
+            min-width: 95px;
+            padding: 13px 20px;
+            border: 1px solid #ccc;
+            background: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .btn:hover {
+            background: #f4f4f4;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: #31594c;
+            border-color: #31594c;
+        }
+
+        .btn-primary:hover {
+            background: #24483d;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background: #777;
+            border-color: #777;
+        }
+
+        /* =========================
+           COMMENTS
+        ========================= */
+
+        .comments {
+            margin-top: 80px;
+        }
+
+        .comments-title {
+            padding-bottom: 18px;
+            border-bottom: 2px solid #222;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .comments-title span {
+            color: #779b80;
+        }
+
+        .comment-write {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f7f7f7;
+            border: 1px solid #eee;
+        }
+
+        .comment-write textarea {
+            display: block;
+            width: 100%;
+            height: 100px;
+            resize: vertical;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #fff;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .comment-write textarea:focus {
+            border-color: #779b80;
+        }
+
+        .comment-write-bottom {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .comment-submit {
+            padding: 11px 25px;
+            border: 0;
+            background: #31594c;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .comment-list {
+            border-top: 1px solid #ddd;
+            margin-top: 30px;
+        }
+
+        .comment {
+            padding: 23px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comment-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .comment-date {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .comment-body {
+            margin-top: 12px;
+            line-height: 1.7;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comment-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .comment-actions button {
+            border: 0;
+            background: none;
+            color: #999;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .comment-actions button:hover {
+            color: #333;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            background: #252a27;
+            color: #aaa;
+            padding: 45px 30px;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            color: #666;
+        }
+
+        /* =========================
+           TOP BUTTON
+        ========================= */
+
+        .top-btn {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+
+            width: 48px;
+            height: 48px;
+
+            border: 0;
+            border-radius: 50%;
+            background: #31594c;
+            color: #fff;
+
+            cursor: pointer;
+            font-size: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.15);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .nav {
+                display: none;
+            }
+
+            .header-inner {
+                padding: 0 20px;
+            }
+
+            .sub-hero {
+                height: 240px;
+            }
+
+            .sub-hero h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                padding: 55px 20px 80px;
+            }
+
+            .post-title {
+                font-size: 21px;
+            }
+
+            .post-content {
+                padding: 40px 5px 50px;
+            }
+
+            .post-info {
+                flex-wrap: wrap;
+                gap: 8px 15px;
+            }
+
+            .button-area {
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                min-width: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+    <div class="header-inner">
+
+        <a href="#" class="logo">
+            RESORT
+            <span>NATURE &amp; HEALING</span>
+        </a>
+
+        <nav class="nav">
+            <a href="#">브랜드 소개</a>
+            <a href="#">리조트 소식</a>
+            <a href="#">특별한 경험</a>
+            <a href="#">예약</a>
+            <a href="#">회원 서비스</a>
+        </nav>
+
+        <div class="header-util">
+            <a href="#">로그인</a>
+            <a href="#">회원가입</a>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="sub-hero">
+    <div>
+        <h1>리조트 소식</h1>
+        <p>자연과 함께하는 특별한 이야기를 만나보세요.</p>
+    </div>
+</section>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+    <div class="page-title">
+        <h2>공지사항</h2>
+        <p>리조트의 새로운 소식과 다양한 이야기를 전해드립니다.</p>
+    </div>
+
+
+    <!-- POST -->
+
+    <article class="post">
+
+        <div class="post-header">
+
+            <div class="post-category">
+                RESORT NEWS
+            </div>
+
+            <h3 class="post-title">
+                자연 속에서 만나는 특별한 휴식, 리조트 신규 프로그램 안내
+            </h3>
+
+            <div class="post-info">
+                <span>작성자 : 관리자</span>
+                <span>작성일 : 2026.09.16</span>
+                <span>조회수 : 128</span>
+            </div>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="post-content">
+
+            <img
+                src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80"
+                alt="리조트 자연 풍경"
+            >
+
+            <h3>새로운 휴식의 시간을 준비했습니다.</h3>
+
+            <p>
+                푸른 자연과 편안한 공간에서 더욱 여유로운 시간을
+                보내실 수 있도록 새로운 리조트 프로그램을 준비했습니다.
+            </p>
+
+            <p>
+                아름다운 숲길을 따라 산책하고, 가족과 함께 특별한
+                추억을 만들며 일상에서 잠시 벗어나 온전한 휴식을
+                경험해 보세요.
+            </p>
+
+            <h3>프로그램 안내</h3>
+
+            <p>
+                운영기간 : 2026년 9월 20일 ~ 2026년 10월 31일
+            </p>
+
+            <p>
+                운영시간 : 매일 오전 10시 ~ 오후 6시
+            </p>
+
+            <p>
+                자세한 프로그램 및 예약 방법은 홈페이지를 통해
+                확인하실 수 있습니다.
+            </p>
+
+        </div>
+
+
+        <!-- ATTACHMENT -->
+
+        <div class="attachment">
+            <strong>첨부파일</strong>
+            <a href="#">resort_program_2026.pdf</a>
+        </div>
+
+
+        <!-- PREV / NEXT -->
+
+        <div class="post-navigation">
+
+            <a href="#">
+                <span>▲ 이전글</span>
+                <span>가을 시즌 객실 패키지 안내</span>
+            </a>
+
+            <a href="#">
+                <span>▼ 다음글</span>
+                <span>리조트 이용 안내 및 시설 점검 공지</span>
+            </a>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="button-area">
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                onclick="location.href='news_list.html';">
+                목록
+            </button>
+
+            <button
+                type="button"
+                class="btn"
+                onclick="location.href='news_edit.html';">
+                수정
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-danger"
+                onclick="deletePost();">
+                삭제
+            </button>
+
+            <button
+                type="button"
+                class="btn"
+                onclick="location.href='news_reply.html';">
+                답변달기
+            </button>
+
+        </div>
+
+    </article>
+
+
+    <!-- =========================
+         COMMENTS
+    ========================= -->
+
+    <section class="comments">
+
+        <h3 class="comments-title">
+            댓글 <span>3</span>
+        </h3>
+
+
+        <!-- COMMENT WRITE -->
+
+        <div class="comment-write">
+
+            <textarea
+                id="commentText"
+                placeholder="댓글을 입력해주세요."></textarea>
+
+            <div class="comment-write-bottom">
+
+                <button
+                    type="button"
+                    class="comment-submit"
+                    onclick="addComment();">
+                    댓글 등록
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- COMMENT LIST -->
+
+        <div class="comment-list" id="commentList">
+
+            <div class="comment">
+
+                <div class="comment-head">
+                    <span class="comment-author">김○○</span>
+                    <span class="comment-date">2026.09.16</span>
+                </div>
+
+                <div class="comment-body">
+                    좋은 프로그램이네요. 가족들과 방문해 보고 싶습니다.
+                </div>
+
+                <div class="comment-actions">
+                    <button type="button">수정</button>
+                    <button type="button">삭제</button>
+                    <button type="button">답글</button>
+                </div>
+
+            </div>
+
+
+            <div class="comment">
+
+                <div class="comment-head">
+                    <span class="comment-author">이○○</span>
+                    <span class="comment-date">2026.09.15</span>
+                </div>
+
+                <div class="comment-body">
+                    가을에 방문할 예정인데 프로그램 일정이 잘 맞을 것 같아요.
+                </div>
+
+                <div class="comment-actions">
+                    <button type="button">수정</button>
+                    <button type="button">삭제</button>
+                    <button type="button">답글</button>
+                </div>
+
+            </div>
+
+
+            <div class="comment">
+
+                <div class="comment-head">
+                    <span class="comment-author">박○○</span>
+                    <span class="comment-date">2026.09.14</span>
+                </div>
+
+                <div class="comment-body">
+                    자세한 안내 감사합니다.
+                </div>
+
+                <div class="comment-actions">
+                    <button type="button">수정</button>
+                    <button type="button">삭제</button>
+                    <button type="button">답글</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+        <div class="footer-logo">
+            RESORT
+        </div>
+
+        <p>
+            서울특별시 서초구 양재대로2길 18<br>
+            고객센터 1600-0000
+        </p>
+
+        <p class="copyright">
+            COPYRIGHT © RESORT. ALL RIGHTS RESERVED.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- TOP BUTTON -->
+
+<button
+    type="button"
+    class="top-btn"
+    onclick="window.scrollTo({top:0, behavior:'smooth'});">
+    TOP
+</button>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* 게시글 삭제 */
+    function deletePost() {
+
+        const result = confirm(
+            "정말 이 게시글을 삭제하시겠습니까?"
+        );
+
+        if (result) {
+            alert("게시글이 삭제되었습니다.");
+
+            // 실제 서버 연결 시
+            // location.href = "news_delete.asp?idxnum=1";
+        }
+    }
+
+
+    /* 댓글 등록 */
+    function addComment() {
+
+        const textarea =
+            document.getElementById("commentText");
+
+        const text =
+            textarea.value.trim();
+
+        if (text === "") {
+
+            alert("댓글 내용을 입력해주세요.");
+            textarea.focus();
+
+            return;
+        }
+
+
+        const comment =
+            document.createElement("div");
+
+        comment.className = "comment";
+
+        const today =
+            new Date().toISOString().substring(0, 10);
+
+
+        comment.innerHTML = `
+
+            <div class="comment-head">
+
+                <span class="comment-author">
+                    관리자
+                </span>
+
+                <span class="comment-date">
+                    ${today}
+                </span>
+
+            </div>
+
+            <div class="comment-body">
+                ${escapeHtml(text)}
+            </div>
+
+            <div class="comment-actions">
+
+                <button type="button">
+                    수정
+                </button>
+
+                <button type="button">
+                    삭제
+                </button>
+
+                <button type="button">
+                    답글
+                </button>
+
+            </div>
+
+        `;
+
+
+        document
+            .getElementById("commentList")
+            .prepend(comment);
+
+        textarea.value = "";
+    }
+
+
+    /* 댓글 HTML 입력 방지 */
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>현재잔액</h2>
+    <h2 id="money">2000000</h2>
+    <input type="text" name="num" id="num"><br>
+    <button type="button" onclick="btn()">확인</button>
+    <script>
+        function btn(){
+            var money = document.getElementById("money").innerText;
+            console.log("머니 : ",money)
+            //var num = document.getElementById("num").value;
+            //alert(num);
+        }
+    </script>
+</body>
+</html>

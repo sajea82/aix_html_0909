@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SOFT FOREST RESORT</title>
+
+    <!-- Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+            color: #333;
+            background: #f8f6f1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 84px;
+            z-index: 1000;
+
+            color: #fff;
+            background: rgba(45, 58, 47, 0.25);
+
+            transition: all .35s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(250, 248, 242, 0.96);
+            color: #26382d;
+            box-shadow: 0 2px 15px rgba(0,0,0,.06);
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1500px;
+            height: 100%;
+            margin: auto;
+            padding: 0 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-main {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            letter-spacing: 5px;
+        }
+
+        .logo-sub {
+            margin-top: 7px;
+            font-size: 9px;
+            letter-spacing: 4px;
+            opacity: .85;
+        }
+
+
+        /* NAV */
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 42px;
+        }
+
+        .nav a {
+            position: relative;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .nav a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+
+            width: 0;
+            height: 1px;
+
+            background: currentColor;
+
+            transform: translateX(-50%);
+            transition: width .3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+
+        /* HEADER RIGHT */
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .reservation {
+            padding: 11px 21px;
+
+            border: 1px solid rgba(255,255,255,.65);
+            border-radius: 30px;
+
+            font-size: 12px;
+        }
+
+        .scrolled .reservation {
+            border-color: #59685c;
+        }
+
+        .menu-btn {
+            width: 38px;
+            height: 38px;
+
+            border: 0;
+            background: transparent;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 22px;
+            height: 1px;
+            background: currentColor;
+            margin-left: auto;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(32, 45, 36, .12),
+                    rgba(32, 45, 36, .42)
+                ),
+                url("https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=2200&q=90")
+                center center / cover no-repeat;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(20,30,24,.18),
+                    transparent 40%,
+                    rgba(20,30,24,.25)
+                );
+        }
+
+        .hero-content {
+            position: absolute;
+            left: 50%;
+            top: 52%;
+
+            z-index: 2;
+
+            width: 90%;
+            text-align: center;
+
+            color: #fff;
+
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-small {
+            margin-bottom: 22px;
+
+            font-size: 13px;
+            letter-spacing: 5px;
+            font-weight: 300;
+        }
+
+        .hero-title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(55px, 8vw, 110px);
+            font-weight: 400;
+            letter-spacing: 4px;
+            line-height: 1.05;
+        }
+
+        .hero-text {
+            margin-top: 27px;
+
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 2;
+
+            letter-spacing: .5px;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+
+            margin-top: 35px;
+            padding: 13px 28px;
+
+            border: 1px solid rgba(255,255,255,.7);
+            border-radius: 30px;
+
+            font-size: 12px;
+
+            transition: all .3s ease;
+        }
+
+        .hero-button:hover {
+            background: #fff;
+            color: #33453a;
+        }
+
+
+        /* SCROLL */
+
+        .scroll-down {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+
+            z-index: 3;
+
+            transform: translateX(-50%);
+
+            color: #fff;
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .scroll-down::after {
+            content: "";
+
+            display: block;
+
+            width: 1px;
+            height: 55px;
+
+            margin: 12px auto 0;
+
+            background: rgba(255,255,255,.8);
+        }
+
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .intro {
+            padding: 150px 30px 130px;
+            text-align: center;
+            background: #f8f6f1;
+        }
+
+        .section-label {
+            color: #899486;
+
+            font-size: 11px;
+            letter-spacing: 4px;
+        }
+
+        .intro h2 {
+            margin-top: 18px;
+
+            color: #2e3e34;
+
+            font-family: Georgia, serif;
+            font-size: 46px;
+            font-weight: 400;
+        }
+
+        .intro p {
+            max-width: 680px;
+
+            margin: 28px auto 0;
+
+            color: #777;
+
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 2.1;
+        }
+
+
+        /* =========================
+           IMAGE STORY
+        ========================= */
+
+        .story {
+            width: 100%;
+            max-width: 1400px;
+
+            margin: auto;
+            padding: 0 40px 150px;
+
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 45px;
+
+            align-items: center;
+        }
+
+        .story-image {
+            height: 610px;
+
+            overflow: hidden;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform .7s ease;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.04);
+        }
+
+        .story-content {
+            padding: 40px 50px;
+        }
+
+        .story-content span {
+            color: #8b978c;
+
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        .story-content h3 {
+            margin-top: 20px;
+
+            color: #2f3f35;
+
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .story-content p {
+            margin-top: 25px;
+
+            color: #777;
+
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .more-btn {
+            display: inline-block;
+
+            margin-top: 35px;
+            padding-bottom: 8px;
+
+            border-bottom: 1px solid #4c5c50;
+
+            color: #3e4e43;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           RESORT CARDS
+        ========================= */
+
+        .resort-section {
+            padding: 130px 40px 150px;
+
+            background: #ebe9e0;
+        }
+
+        .section-title {
+            text-align: center;
+        }
+
+        .section-title h2 {
+            margin-top: 15px;
+
+            color: #2f3e34;
+
+            font-family: Georgia, serif;
+            font-size: 44px;
+            font-weight: 400;
+        }
+
+        .section-title p {
+            margin-top: 18px;
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        .resort-list {
+            width: 100%;
+            max-width: 1300px;
+
+            margin: 65px auto 0;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .resort-card {
+            position: relative;
+
+            height: 460px;
+
+            overflow: hidden;
+
+            color: #fff;
+        }
+
+        .resort-card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform .7s ease;
+        }
+
+        .resort-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .resort-card::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 35%,
+                    rgba(20,30,24,.65)
+                );
+        }
+
+        .card-content {
+            position: absolute;
+            left: 35px;
+            right: 30px;
+            bottom: 32px;
+
+            z-index: 2;
+        }
+
+        .card-content small {
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .card-content h3 {
+            margin-top: 8px;
+
+            font-family: Georgia, serif;
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .card-content p {
+            margin-top: 8px;
+
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+
+        /* =========================
+           NEWS
+        ========================= */
+
+        .news-section {
+            padding: 140px 40px;
+
+            background: #f8f6f1;
+        }
+
+        .news-inner {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .news-title {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+
+            padding-bottom: 25px;
+
+            border-bottom: 1px solid #d8d6cd;
+        }
+
+        .news-title h2 {
+            color: #2e3e34;
+
+            font-family: Georgia, serif;
+            font-size: 40px;
+            font-weight: 400;
+        }
+
+        .news-more {
+            font-size: 11px;
+            color: #777;
+        }
+
+        .news-item {
+            min-height: 90px;
+
+            padding: 22px 10px;
+
+            border-bottom: 1px solid #e5e3dc;
+
+            display: grid;
+            grid-template-columns: 100px 1fr 110px;
+
+            align-items: center;
+
+            transition: background .3s ease;
+        }
+
+        .news-item:hover {
+            background: #f1efe8;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 11px;
+        }
+
+        .news-name {
+            color: #444;
+            font-size: 14px;
+        }
+
+        .news-category {
+            color: #899486;
+            font-size: 11px;
+            text-align: right;
+        }
+
+
+        /* =========================
+           NEWSLETTER
+        ========================= */
+
+        .newsletter {
+            padding: 100px 30px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    rgba(48,64,53,.78),
+                    rgba(48,64,53,.78)
+                ),
+                url("https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1800&q=85")
+                center / cover;
+            color: #fff;
+        }
+
+        .newsletter h2 {
+            font-family: Georgia, serif;
+            font-size: 38px;
+            font-weight: 400;
+        }
+
+        .newsletter p {
+            margin-top: 16px;
+
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        .newsletter button {
+            margin-top: 28px;
+
+            padding: 13px 30px;
+
+            border: 1px solid rgba(255,255,255,.7);
+            border-radius: 30px;
+
+            color: #fff;
+            background: transparent;
+
+            font-size: 12px;
+
+            transition: .3s;
+        }
+
+        .newsletter button:hover {
+            background: #fff;
+            color: #35483b;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 65px 50px 35px;
+
+            color: #a8aea8;
+            background: #26362c;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .footer-logo {
+            color: #fff;
+
+            font-family: Georgia, serif;
+            font-size: 28px;
+            letter-spacing: 4px;
+        }
+
+        .footer-menu {
+            margin-top: 30px;
+
+            display: flex;
+            gap: 25px;
+
+            font-size: 12px;
+        }
+
+        .footer-info {
+            margin-top: 35px;
+
+            font-size: 11px;
+            line-height: 2;
+        }
+
+        .copyright {
+            margin-top: 40px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid rgba(255,255,255,.1);
+
+            font-size: 10px;
+            letter-spacing: .5px;
+        }
+
+
+        /* =========================
+           TOP BUTTON
+        ========================= */
+
+        .top-btn {
+            position: fixed;
+
+            right: 30px;
+            bottom: 30px;
+
+            z-index: 999;
+
+            width: 48px;
+            height: 48px;
+
+            border: 1px solid #c8c7bf;
+            border-radius: 50%;
+
+            color: #39483e;
+            background: rgba(255,255,255,.9);
+
+            font-size: 10px;
+            letter-spacing: 1px;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: all .3s ease;
+        }
+
+        .top-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .top-btn:hover {
+            color: #fff;
+            background: #35473b;
+            border-color: #35473b;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .nav {
+                gap: 22px;
+            }
+
+            .header-inner {
+                padding: 0 30px;
+            }
+
+            .story {
+                grid-template-columns: 1fr;
+            }
+
+            .story-content {
+                padding: 30px 20px;
+            }
+
+            .resort-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+
+            .header {
+                height: 70px;
+            }
+
+            .header-inner {
+                padding: 0 20px;
+            }
+
+            .nav,
+            .reservation {
+                display: none;
+            }
+
+            .logo-main {
+                font-size: 25px;
+            }
+
+            .hero {
+                min-height: 650px;
+            }
+
+            .hero-title {
+                font-size: 58px;
+            }
+
+            .hero-text {
+                font-size: 13px;
+            }
+
+            .intro {
+                padding: 100px 25px;
+            }
+
+            .intro h2 {
+                font-size: 36px;
+            }
+
+            .story {
+                padding: 0 20px 100px;
+            }
+
+            .story-image {
+                height: 430px;
+            }
+
+            .story-content h3 {
+                font-size: 35px;
+            }
+
+            .resort-section {
+                padding: 100px 20px;
+            }
+
+            .resort-list {
+                grid-template-columns: 1fr;
+            }
+
+            .resort-card {
+                height: 420px;
+            }
+
+            .news-section {
+                padding: 100px 20px;
+            }
+
+            .news-item {
+                grid-template-columns: 75px 1fr;
+            }
+
+            .news-category {
+                display: none;
+            }
+
+            .newsletter h2 {
+                font-size: 31px;
+            }
+
+            footer {
+                padding: 50px 25px 30px;
+            }
+
+            .footer-menu {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .top-btn {
+                right: 18px;
+                bottom: 18px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header" id="header">
+
+        <div class="header-inner">
+
+            <a href="#" class="logo">
+                <span class="logo-main">SOFT</span>
+                <span class="logo-sub">FOREST RESORT</span>
+            </a>
+
+            <nav class="nav">
+                <a href="#about">리조트 소개</a>
+                <a href="#resort">객실</a>
+                <a href="#resort">스파 & 웰니스</a>
+                <a href="#news">리조트 소식</a>
+                <a href="#contact">예약</a>
+            </nav>
+
+            <div class="header-right">
+
+                <a href="#contact" class="reservation">
+                    RESERVATION
+                </a>
+
+                <button class="menu-btn" aria-label="메뉴">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                A MOMENT OF REST
+            </div>
+
+            <h1 class="hero-title">
+                SOFT FOREST
+            </h1>
+
+            <p class="hero-text">
+                바쁜 일상에서 잠시 벗어나<br>
+                자연과 함께 편안한 쉼을 만나는 시간
+            </p>
+
+            <a href="#about" class="hero-button">
+                EXPLORE MORE
+            </a>
+
+        </div>
+
+
+        <div class="scroll-down">
+            SCROLL
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         INTRO
+    ========================= -->
+
+    <section class="intro" id="about">
+
+        <div class="section-label">
+            WELCOME TO SOFT FOREST
+        </div>
+
+        <h2>
+            나를 위한 가장 따뜻한 휴식
+        </h2>
+
+        <p>
+            숲의 고요함과 부드러운 햇살,
+            자연의 향기가 머무는 공간.<br>
+            소프트 포레스트는 일상에서 잠시 벗어나
+            온전한 나를 만나는 휴식을 이야기합니다.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         STORY
+    ========================= -->
+
+    <section class="story">
+
+        <div class="story-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1400&q=85"
+                alt="숲속의 편안한 리조트"
+            >
+
+        </div>
+
+
+        <div class="story-content">
+
+            <span>THE NATURAL WAY</span>
+
+            <h3>
+                자연이 주는<br>
+                가장 편안한 순간
+            </h3>
+
+            <p>
+                창밖으로 펼쳐지는 초록의 풍경과
+                은은하게 스며드는 햇살.
+                하루의 속도를 천천히 늦추고
+                마음에 여유를 채워보세요.
+            </p>
+
+            <a href="#" class="more-btn">
+                VIEW STORY →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESORT
+    ========================= -->
+
+    <section class="resort-section" id="resort">
+
+        <div class="section-title">
+
+            <div class="section-label">
+                SPECIAL PLACE
+            </div>
+
+            <h2>
+                당신을 위한 공간
+            </h2>
+
+            <p>
+                자연 속에서 만나는 세 가지 휴식
+            </p>
+
+        </div>
+
+
+        <div class="resort-list">
+
+
+            <!-- CARD 1 -->
+
+            <a href="#" class="resort-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1601918774946-25832a4be0d6?auto=format&fit=crop&w=1000&q=85"
+                    alt="Forest Room"
+                >
+
+                <div class="card-content">
+
+                    <small>ROOM</small>
+
+                    <h3>
+                        Forest Room
+                    </h3>
+
+                    <p>
+                        숲의 풍경을 가까이에서 만나는 객실
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <!-- CARD 2 -->
+
+            <a href="#" class="resort-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=85"
+                    alt="Wellness Spa"
+                >
+
+                <div class="card-content">
+
+                    <small>WELLNESS</small>
+
+                    <h3>
+                        Wellness Spa
+                    </h3>
+
+                    <p>
+                        몸과 마음의 긴장을 천천히 내려놓는 시간
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <!-- CARD 3 -->
+
+            <a href="#" class="resort-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1000&q=85"
+                    alt="Healing Garden"
+                >
+
+                <div class="card-content">
+
+                    <small>HEALING</small>
+
+                    <h3>
+                        Healing Garden
+                    </h3>
+
+                    <p>
+                        계절의 아름다움을 만나는 작은 정원
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NEWS
+    ========================= -->
+
+    <section class="news-section" id="news">
+
+        <div class="news-inner">
+
+            <div class="news-title">
+
+                <h2>
+                    News
+                </h2>
+
+                <a href="#" class="news-more">
+                    MORE +
+                </a>
+
+            </div>
+
+
+            <a href="#" class="news-item">
+
+                <span class="news-date">
+                    2026.09.16
+                </span>
+
+                <span class="news-name">
+                    가을 숲에서 만나는 특별한 힐링 프로그램
+                </span>
+
+                <span class="news-category">
+                    EVENT
+                </span>
+
+            </a>
+
+
+            <a href="#" class="news-item">
+
+                <span class="news-date">
+                    2026.09.10
+                </span>
+
+                <span class="news-name">
+                    소프트 포레스트 신규 웰니스 프로그램 안내
+                </span>
+
+                <span class="news-category">
+                    NEWS
+                </span>
+
+            </a>
+
+
+            <a href="#" class="news-item">
+
+                <span class="news-date">
+                    2026.09.03
+                </span>
+
+                <span class="news-name">
+                    자연과 함께하는 가을 시즌 객실 패키지
+                </span>
+
+                <span class="news-category">
+                    PACKAGE
+                </span>
+
+            </a>
+
+
+            <a href="#" class="news-item">
+
+                <span class="news-date">
+                    2026.08.28
+                </span>
+
+                <span class="news-name">
+                    숲속에서 즐기는 새로운 다이닝 메뉴
+                </span>
+
+                <span class="news-category">
+                    DINING
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NEWSLETTER
+    ========================= -->
+
+    <section class="newsletter" id="contact">
+
+        <h2>
+            Your quiet moment
+        </h2>
+
+        <p>
+            자연 속에서 천천히 쉬어가는 시간을 만나보세요.
+        </p>
+
+        <button onclick="location.href='#'">
+            RESERVATION
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div class="footer-logo">
+                SOFT FOREST
+            </div>
+
+            <div class="footer-menu">
+
+                <a href="#">회사소개</a>
+                <a href="#">이용약관</a>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">오시는 길</a>
+                <a href="#">고객센터</a>
+
+            </div>
+
+
+            <div class="footer-info">
+
+                SOFT FOREST RESORT<br>
+                서울특별시 ○○구 ○○로 00<br>
+                예약문의 : 1600-0000<br>
+                이메일 : hello@softforest.co.kr
+
+            </div>
+
+
+            <div class="copyright">
+                COPYRIGHT © SOFT FOREST RESORT. ALL RIGHTS RESERVED.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- TOP BUTTON -->
+
+    <button class="top-btn" id="topBtn">
+        TOP
+    </button>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const header = document.getElementById("header");
+        const topBtn = document.getElementById("topBtn");
+
+
+        /* 스크롤 시 HEADER 변경 */
+
+        window.addEventListener("scroll", function () {
+
+            if (window.scrollY > 80) {
+
+                header.classList.add("scrolled");
+                topBtn.classList.add("show");
+
+            } else {
+
+                header.classList.remove("scrolled");
+                topBtn.classList.remove("show");
+
+            }
+
+        });
+
+
+        /* TOP 버튼 */
+
+        topBtn.addEventListener("click", function () {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+
+        /* 메뉴 버튼 */
+
+        document.querySelector(".menu-btn").addEventListener("click", function () {
+
+            alert("전체 메뉴가 열립니다.");
+
+        });
+
+    </script>
+
+</body>
+</html>
