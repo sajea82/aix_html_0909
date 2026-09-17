@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생성적프로그램</title>
+    <style>
+        table,th,td{border:1px solid black; border-collapse: collapse;}
+        th,td{width:80px; height:40px; }
+    </style>
+</head>
+<body>
+    <input type="text" name="name" id="name" placeholder="이름입력">
+    <input type="text" name="kor" id="kor" placeholder="국어성적입력">
+    <input type="text" name="eng" id="eng" placeholder="영어성적입력">
+    <input type="text" name="math" id="math" placeholder="수학성적입력">
+    <input type="text" name="total" id="total" placeholder="합계" readonly>
+    <input type="text" name="avg" id="avg" placeholder="평균" readonly>
+    <br><br>
+    <button type="button" onclick="saveBtn()">저장</button>
+
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>국어</th>
+            <th>영어</th>
+            <th>수학</th>
+            <th>합계</th>
+            <th>평균</th>
+        </tr>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <script>
+        var arr = ['홍길동','유관순','이순신'];
+        var arr_k = [100,90,80];
+        var arr_e = [100,90,80];
+        var arr_m = [100,90,80];
+        var arr_t = [270,270,240];
+        var arr_a = [90,90,80];
+
+        function saveBtn(){
+            var nlist = document.getElementById("tbody");
+            var name = document.getElementById("name").value;
+            var kor = Number(document.getElementById("kor").value);
+            var eng = Number(document.getElementById("eng").value);
+            var math = Number(document.getElementById("math").value);
+            var total = kor+eng+math;
+            var avg = total/3;
+            
+            arr.push(name);
+            arr_k.push(kor);
+            arr_e.push(eng);
+            arr_m.push(math);
+            arr_t.push(total);
+            arr_a.push(avg);
+            
+            var i = arr.length -1;
+
+            document.getElementById("name").value = "";
+            document.getElementById("kor").value = "";
+            document.getElementById("eng").value = "";
+            document.getElementById("math").value = "";
+            document.getElementById("total").innerText = total;
+            document.getElementById("avg").innerText = avg;
+
+            nlist.innerHTML += `
+            <tr><td>${arr[i]}</td>
+            <td>${arr_k[i]}</td>
+            <td>${arr_e[i]}</td>
+            <td>${arr_m[i]}</td>
+            <td>${arr_t[i]}</td>
+            <td>${arr_a[i]}</td>
+            </tr>`;}
+
+        var txtHtml = ``;
+        for(var i=0;i<arr.length;i++){
+            txtHtml += `<tr>
+                <td>${arr[i]}</td>
+                <td>${arr_k[i]}</td>
+                <td>${arr_e[i]}</td>
+                <td>${arr_m[i]}</td>
+                <td>${arr_t[i]}</td>
+                <td>${arr_a[i]}</td>
+                </tr>`;
+        }
+        document.getElementById("tbody").innerHTML = txtHtml
+    </script>
+</body>
+</html>
