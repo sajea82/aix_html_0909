@@ -7,6 +7,7 @@
     <style>
         table,th,td{border:1px solid black; border-collapse: collapse;}
         th,td{width:80px; height:40px; }
+        #total,#avg{display: none;}
     </style>
 </head>
 <body>
@@ -62,8 +63,6 @@
             document.getElementById("kor").value = "";
             document.getElementById("eng").value = "";
             document.getElementById("math").value = "";
-            document.getElementById("total").value = total;
-            document.getElementById("avg").value = avg;
 
             nlist.innerHTML += `
             <tr><td>${arr[i]}</td>
