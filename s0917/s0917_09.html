@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,th,td{border: 1px solid black; border-collapse: collapse;}
+        th,td{width: 80px; height: 40px;}
+    </style>
+</head>
+<body>
+    <input type="text" name="name" id="name" placeholder="이름입력"> 
+    <input type="text" name="kor" id="kor" placeholder="국어성적입력"> 
+    <br>
+    <button type="button" onclick="saveBtn()">저장</button>
+
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>국어</th>
+        </tr>
+
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <script>
+        var arr = []
+        var arr_k = []
+
+        function saveBtn(){
+            var nlist = document.getElementById("tbody");
+            var name = document.getElementById("name").value;
+            var kor = Number(document.getElementById("kor").value);
+            arr.push(name);
+            document.getElementById("name").value = "";
+            nlist.innerHTML += `<tr>
+            <td>${name}</td>
+            <td>${kor}</td>
+            </tr>`;
+            //alert("test")
+
+            var txtHtml = ``;
+            for(var i=0;i<arr.length;i++){
+                txtHtml +=`<tr>
+                    <td>${arr[i]}</td>
+                    <td>${arr_k[i]}</td>
+                    </tr>`;
+            }
+        }
+        document.getElementById("tbody").innerHTML = txtHtml;
+
+    </script>
+</body>
+</html>
