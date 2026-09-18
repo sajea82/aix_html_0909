@@ -8,7 +8,6 @@
 
     <style>
         h2{text-align: center;}
-
         table,th,td{
             border:1px solid black;
             border-collapse: collapse;
@@ -16,13 +15,13 @@
 
         table{
             width:1000px;
-            text-align:center;
-            box-sizing:border-box;
+            text-align: center;
+            box-sizing: border-box;
             margin:50px auto;
         }
 
         th{
-            background:#efefef;
+            background: #efefef;
             height:60px;
         }
 
@@ -30,6 +29,13 @@
             height:40px;
         }
     </style>
+
+    <script>
+        var students = [
+            {"no":1,"name":"홍길동","kor":100,"eng":100,"math":100,"total":300,"avg":100.0,"rank":0},
+            {"no":2,"name":"유관순","kor":100,"eng":100,"math":100,"total":300,"avg":100.0,"rank":0},
+        ];
+    </script>
 </head>
 
 <body>
@@ -42,7 +48,7 @@
     <input type="text" name="eng" id="eng" placeholder="영어점수입력"><br>
     <input type="text" name="math" id="math" placeholder="수학점수입력"><br>
 
-    <button type="button">저장</button>
+    <button type="button" onclick="saveBtn()">저장</button>
 
     <table>
         <colgroup>
@@ -72,76 +78,230 @@
         </thead>
 
         <tbody id="tbody">
+
         </tbody>
     </table>
 
 
     <script>
 
-        // 빈 배열
-        var students = [];
+        // ==========================================
+        // 학생 성적 출력
+        // ==========================================
+        function studentPrint(){
 
+            $("#tbody").html("");
 
-        // 학생정보 1개 넣기
-        students.push({
-            no:1,
-            name:"홍길동",
-            kor:100,
-            eng:100,
-            math:100,
-            total:300,
-            avg:100,
-            rank:0
-        });
+            for(var i=0; i<students.length; i++){
 
+                var student = students[i];
 
-        // 학생정보 1개 넣기
-        students.push({
-            no:2,
-            name:"유관순",
-            kor:100,
-            eng:100,
-            math:100,
-            total:300,
-            avg:100,
-            rank:0
-        });
+                var no = student.no;
+                var name = student.name;
+                var kor = student.kor;
+                var eng = student.eng;
+                var math = student.math;
 
+                var total = kor + eng + math;
+                var avg = total / 3;
 
-        // students에 들어있는 학생 수만큼 반복
-        for(var i=0; i<students.length; i++){
+                student.total = total;
+                student.avg = avg;
 
-            var no = students[i].no;
-            var name = students[i].name;
-            var kor = students[i].kor;
-            var eng = students[i].eng;
-            var math = students[i].math;
-            var total = students[i].total;
-            var avg = students[i].avg;
-            var rank = students[i].rank;
-
-
-            var tr = `
-                <tr id="${no}">
-                    <td>${no}</td>
-                    <td>${name}</td>
-                    <td>${kor}</td>
-                    <td>${eng}</td>
-                    <td>${math}</td>
-                    <td>${total}</td>
-                    <td>${avg}</td>
-                    <td>${rank}</td>
-                    <td>
-                        <button class="update">수정</button>
-                        <button class="delete">삭제</button>
-                    </td>
-                </tr>
-            `;
-
-
-            // tbody에 tr 추가
-            $("#tbody").append(tr);
+                $("#tbody").append(`
+                    <tr id="${no}">
+                        <td>${no}</td>
+                        <td>${name}</td>
+                        <td>${kor}</td>
+                        <td>${eng}</td>
+                        <td>${math}</td>
+                        <td>${total}</td>
+                        <td>${avg.toFixed(1)}</td>
+                        <td>${student.rank}</td>
+                        <td>
+                            <button class="update" onclick="updateBtn(${no})">수정</button>
+                            <button class="delete" onclick="deleteBtn(${no})">삭제</button>
+                        </td>
+                    </tr>
+                `);
+            }
         }
+
+
+        // ==========================================
+        // 저장 버튼
+        // ==========================================
+        function saveBtn(){
+
+            var no = Number($("#no").val());
+            var name = $("#name").val();
+            var kor = Number($("#kor").val());
+            var eng = Number($("#eng").val());
+            var math = Number($("#math").val());
+
+            // 입력 확인
+            if(no == "" || name == "" || kor == "" || eng == "" || math == ""){
+                alert("학생 정보를 모두 입력해주세요.");
+                return;
+            }
+
+            // ======================================
+            // 기존 학생인지 확인
+            // ======================================
+            var index = -1;
+
+            for(var i=0; i<students.length; i++){
+
+                if(students[i].no == no){
+                    index = i;
+                    break;
+                }
+            }
+
+
+            // ======================================
+            // 기존 학생이면 수정
+            // ======================================
+            if(index != -1){
+
+                students[index].name = name;
+                students[index].kor = kor;
+                students[index].eng = eng;
+                students[index].math = math;
+
+                students[index].total = kor + eng + math;
+                students[index].avg = students[index].total / 3;
+
+                alert("학생 성적이 수정되었습니다.");
+
+            }
+
+            // ======================================
+            // 새로운 학생이면 추가
+            // ======================================
+            else{
+
+                var total = kor + eng + math;
+                var avg = total / 3;
+
+                var student = {
+                    "no":no,
+                    "name":name,
+                    "kor":kor,
+                    "eng":eng,
+                    "math":math,
+                    "total":total,
+                    "avg":avg,
+                    "rank":0
+                };
+
+                students.push(student);
+
+                alert("학생 성적이 저장되었습니다.");
+            }
+
+
+            // 등수 계산
+            rankCalc();
+
+            // 화면 출력
+            studentPrint();
+
+            // 입력칸 초기화
+            inputClear();
+        }
+
+
+        // ==========================================
+        // 수정 버튼
+        // ==========================================
+        function updateBtn(no){
+
+            // 번호로 학생 찾기
+            for(var i=0; i<students.length; i++){
+
+                if(students[i].no == no){
+
+                    // 해당 학생 정보를 입력칸에 넣기
+                    $("#no").val(students[i].no);
+                    $("#name").val(students[i].name);
+                    $("#kor").val(students[i].kor);
+                    $("#eng").val(students[i].eng);
+                    $("#math").val(students[i].math);
+
+                    break;
+                }
+            }
+        }
+
+
+        // ==========================================
+        // 삭제 버튼
+        // ==========================================
+        function deleteBtn(no){
+
+            if(confirm("학생 정보를 삭제하시겠습니까?")){
+
+                for(var i=0; i<students.length; i++){
+
+                    if(students[i].no == no){
+
+                        students.splice(i,1);
+
+                        break;
+                    }
+                }
+
+                // 삭제 후 등수 다시 계산
+                rankCalc();
+
+                // 화면 다시 출력
+                studentPrint();
+
+                alert("학생 정보가 삭제되었습니다.");
+            }
+        }
+
+
+        // ==========================================
+        // 등수 계산
+        // ==========================================
+        function rankCalc(){
+
+            for(var i=0; i<students.length; i++){
+
+                var rank = 1;
+
+                for(var j=0; j<students.length; j++){
+
+                    if(students[i].total < students[j].total){
+                        rank++;
+                    }
+                }
+
+                students[i].rank = rank;
+            }
+        }
+
+
+        // ==========================================
+        // 입력칸 초기화
+        // ==========================================
+        function inputClear(){
+
+            $("#no").val("");
+            $("#name").val("");
+            $("#kor").val("");
+            $("#eng").val("");
+            $("#math").val("");
+        }
+
+
+        // ==========================================
+        // 프로그램 시작
+        // ==========================================
+        rankCalc();
+        studentPrint();
 
     </script>
 
