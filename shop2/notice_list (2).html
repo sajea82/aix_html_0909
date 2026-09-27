@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/notice_list.css">
+  <title>학생성적프로그램</title>
+  <script>
+    students = [];
+
+    $(function(){
+      //alert("test");
+      //------------>
+      $.ajax({
+                url:"https://apis.data.go.kr/B551011/PhotoGalleryService1/galleryList1?serviceKey=918RE13GA7OY7ZEmUzApgbOeAcQoZ%2FaHsXWcqPAKQ9YNNPj83KOstRMRIUrCFIAcm9qj2R6b7NFZjp%2FYsYzJLg%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A&_type=json",
+                type:"get",
+                data:{},
+                dataType:"json",
+                success:function(data){
+                    alert("성공")
+                    console.log(data.response.body.items.item);
+                    //서버에서 데이터를 받아서 변수에 저장
+                    students = data.response.body.items.item;
+                    //------->
+                    var txtHtml = '';
+                    for(var i=0;i<10;i++){
+                      txtHtml += `<tr>
+                          <td>${students[i].galContentId}</td>
+                          <td class="table-title">${students[i].galTitle}</td>
+                          <td>${students[i].galPhotographyMonth}</td>
+                          <td>${students[i].galPhotographer}</td>
+                          <td><img style="width:100px;" src="${students[i].galWebImageUrl}"></td>
+                        </tr>`;
+                    }
+                    $("#tbody").html(txtHtml);
+
+
+                },
+                error:function(){
+                    alert("실패");
+                }
+            })
+
+
+
+      //------------>
+
+
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <ul>
+      <li>회원가입</li> <span>|</span>
+      <li>로그인</li> <span>|</span>
+      <li>고객행복센터</li> <span>|</span>
+      <li>배송지역검색</li> <span>|</span>
+      <li>기프트카드 등록</li>
+    </ul>
+  </header>
+
+  <nav>
+    <div class="logo"></div>
+
+    <div id="search">
+      <div class="search"></div><br>
+      <span>메뉴찾기</span>
+    </div>
+
+    <div id="cart">
+      <div class="cart"></div><br>
+      <span>장바구니</span>
+    </div>
+
+    <div class="nav-menu">
+      <ul>
+        <li>COOKIT소개</li>
+        <li>COOKIT 메뉴</li>
+        <li>리뷰</li>
+        <li>이벤트</li>
+        <li>MY쿡킷</li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+    <h1>학생성적리스트</h1>
+    <div class="wrapper">
+      <form action="/search" name="search" method="post">
+        <select name="category" id="category">
+          <option value="0">전체</option>
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+        </select>
+
+        <div class="title">
+          <input type="text" size="16">
+        </div>
+
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+
+    <table>
+      <colgroup>
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+      </colgroup>
+      <tr>
+        <th>No.</th>
+        <th>이름</th>
+        <th>국어</th>
+        <th>영어</th>
+        <th>수학</th>
+        <th>합계</th>
+        <th>평균</th>
+        <th>등수</th>
+        <th>비고</th>
+      </tr>
+      <tbody id="tbody">
+
+      </tbody>
+    </table>
+
+    <ul class="page-num">
+      <li class="first"></li>
+      <li class="prev"></li>
+      <li class="num">
+        <div>1</div>
+      </li>
+      <li class="next"></li>
+      <li class="last"></li>
+    </ul>
+
+    <div class="write">쓰기</div>
+  </section>
+  <script>
+
+
+  </script>
+</body>
+</html>
